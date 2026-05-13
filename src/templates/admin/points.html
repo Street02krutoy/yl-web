@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+{% block title %}Точки{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">Точки на карте</h1>
+    <a href="{{ url_for('admin_point_add') }}"
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+        + Добавить
+    </a>
+</div>
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-gray-600">
+            <tr>
+                <th class="text-left px-4 py-3 font-medium">ID</th>
+                <th class="text-left px-4 py-3 font-medium">Название</th>
+                <th class="text-left px-4 py-3 font-medium">Широта</th>
+                <th class="text-left px-4 py-3 font-medium">Долгота</th>
+                <th class="text-left px-4 py-3 font-medium">Описание</th>
+                <th class="text-right px-4 py-3 font-medium">Действия</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for p in points %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">{{ p.id }}</td>
+                <td class="px-4 py-3 font-medium">{{ p.name }}</td>
+                <td class="px-4 py-3">{{ p.latitude }}</td>
+                <td class="px-4 py-3">{{ p.longitude }}</td>
+                <td class="px-4 py-3 text-gray-500 max-w-xs truncate">{{ p.description or '' }}</td>
+                <td class="px-4 py-3 text-right">
+                    <a href="{{ url_for('admin_point_edit', id=p.id) }}"
+                        class="text-blue-600 hover:text-blue-800 mr-3">Редактировать</a>
+                    <form action="{{ url_for('admin_point_delete', id=p.id) }}" method="POST"
+                        onsubmit="return confirm('Удалить точку «{{ p.name }}»?')" class="inline">
+                        <button type="submit" class="text-red-600 hover:text-red-800">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="px-4 py-8 text-center text-gray-400">Нет точек</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

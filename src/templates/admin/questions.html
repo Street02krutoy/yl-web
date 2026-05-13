@@ -1,0 +1,56 @@
+{% extends "admin/base.html" %}
+{% block title %}Вопросы{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">Вопросы квиза</h1>
+    <a href="{{ url_for('admin_question_add') }}"
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+        + Добавить
+    </a>
+</div>
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+    <table class="w-full text-sm">
+        <thead class="bg-gray-50 text-gray-600">
+            <tr>
+                <th class="text-left px-4 py-3 font-medium">ID</th>
+                <th class="text-left px-4 py-3 font-medium">Вопрос</th>
+                <th class="text-left px-4 py-3 font-medium">Варианты</th>
+                <th class="text-left px-4 py-3 font-medium">Правильный</th>
+                <th class="text-left px-4 py-3 font-medium">%</th>
+                <th class="text-right px-4 py-3 font-medium">Действия</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for q in questions %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3">{{ q.id }}</td>
+                <td class="px-4 py-3 max-w-xs truncate font-medium">{{ q.text }}</td>
+                <td class="px-4 py-3 text-xs text-gray-500">
+                    1. {{ q.option1 }}<br>
+                    2. {{ q.option2 }}<br>
+                    3. {{ q.option3 }}
+                </td>
+                <td class="px-4 py-3">
+                    {% if q.correct_index == 0 %}{{ q.option1 }}{% endif %}
+                    {% if q.correct_index == 1 %}{{ q.option2 }}{% endif %}
+                    {% if q.correct_index == 2 %}{{ q.option3 }}{% endif %}
+                </td>
+                <td class="px-4 py-3">{{ q.correct_percentage() }}% <span class="text-gray-400 text-xs">({{ q.answers.count() }} ответов)</span></td>
+                <td class="px-4 py-3 text-right">
+                    <a href="{{ url_for('admin_question_edit', id=q.id) }}"
+                        class="text-blue-600 hover:text-blue-800 mr-3">Редактировать</a>
+                    <form action="{{ url_for('admin_question_delete', id=q.id) }}" method="POST"
+                        onsubmit="return confirm('Удалить вопрос?')" class="inline">
+                        <button type="submit" class="text-red-600 hover:text-red-800">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="px-4 py-8 text-center text-gray-400">Нет вопросов</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

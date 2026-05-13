@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Чувашия</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" />
+</head>
+<body>
+    <header class="fixed top-0 left-0 right-0 z-50">
+        <div class="bg-header border-gray-200 dark:border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16 sm:h-20">
+                    <a href="/" aria-label="Home">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Chuvash Republic logo" class="h-8 sm:h-10" />
+                    </a>
+                    <nav aria-label="Main navigation" class="flex items-center gap-6">
+                        <a href="/" class="text-lg font-medium text-gray-800 hover:text-red-600 transition-colors">Главная</a>
+                        <a href="#map-section" class="text-lg font-medium text-gray-800 hover:text-red-600 transition-colors">Карта</a>
+                        <a href="#quiz-section" class="text-lg font-medium text-gray-800 hover:text-red-600 transition-colors">Квиз</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="pt-20 sm:pt-24 overflow-y-auto">
+        <section class="mx-auto max-w-5xl px-6 py-12 text-center" id="about">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold bg-clip-text drop-shadow-sm text-gray-600">
+                Чувашия
+            </h1>
+            <p class="mt-4 mx-auto text-lg sm:text-xl text-gray-600 leading-relaxed">
+                Где в самом сердце России скрывается забытая цивилизация, чей язык оказался единственным ключом к расшифровке древнетюркских рун? Что связывает современную Чувашию с легендарными волжскими булгарами, чьи купцы некогда торговали с Багдадом и Скандинавией? Представьте себе край, где женщины носят на голове состояние в серебряных монетах, где вышивка - это не украшение, а зашифрованное послание из глубины веков, где праздник начинается с ритуального вспахивания первого ряда. Здесь до сих пор пьют пиво по рецептам, которым больше тысячи лет, а древние песни звучат так, будто их пели воины великой Булгарии. Эта земля хранит тайну: как народу удалось пронести свою уникальность через все исторические бури, превратив каждый дом в живой музей, а каждый обряд — в мост между эпохами. Что знают чуваши о выживании цивилизаций, чего не знаем мы?
+            </p>
+        </section>
+
+        <section class="flex flex-col sm:flex-row items-center sm:items-stretch w-full gap-6 py-8 bg-gray-50 text-gray-900">
+            <div class="w-full sm:w-1/2 h-64 sm:h-[50vh] overflow-hidden px-5">
+                <img src="{{ url_for('static', filename='images/image1.png') }}" alt="History image" class="w-full h-full object-cover block rounded-xl" />
+            </div>
+            <div class="w-full sm:w-1/2 flex flex-col justify-center p-6 sm:p-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-3">История</h2>
+                <p class="text-lg sm:text-xl leading-relaxed text-gray-700">
+                    Чувашия раскинулась в самом сердце европейской части России, на правом берегу великой Волги, там, где река делает свой плавный изгиб на пути к Каспийскому морю. Эта земля — естественный мост между лесным Севером и степным Югом, где смешиваются воздушные потоки с Урала и дыхание центральных равнин. Земли современной Чувашии были заселены финно-уграми ещё в I тысячелетии до нашей эры. Но настоящий исторический перелом произошёл в VII-VIII веках, когда сюда пришли волжские булгары - тюркские племена, создавшие одно из самых развитых государств средневековой Восточной Европы. Волжская Булгария (X-XIII вв.) стала первым государством в регионе, принявшим ислам (922 год), а также крупнейшим торговым центром между Европой и Азией.
+                </p>
+            </div>
+        </section>
+
+        <section class="flex flex-col sm:flex-row-reverse items-center sm:items-stretch w-full gap-6 py-8 bg-red-900 text-white dark">
+            <div class="w-full sm:w-1/2 h-64 sm:h-[50vh] overflow-hidden px-5">
+                <img src="{{ url_for('static', filename='images/image2.png') }}" alt="Culture image" class="w-full h-full object-cover block rounded-xl" />
+            </div>
+            <div class="w-full sm:w-1/2 flex flex-col justify-center p-6 sm:p-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-3">Культура</h2>
+                <p class="text-lg sm:text-xl leading-relaxed text-gray-200">
+                    Чувашская вышивка была занесена в нематериальное культурное наследие ЮНЕСКО. Её уникальность в исполнении без предварительного рисунка, использовании двустороннего шва 'роспись' и глубокой цветовой символике: красный - жизнь и солнце, чёрный - земля и мудрость, белый - свет и чистота. Основные узоры несут космогонические смыслы: 'Древо жизни' как мировая ось, 'Солнечная розетка' как восьмилучевая звезда, 'Конь' - символ солнца у древних тюрков, 'Бараньи рога' - плодородие. В чувашском народном костюме каждая деталь рассказывает о возрасте, семейном положении, регионе и социальном статусе человека. Основой женского костюма служит белая холщовая рубаха-кĕпе, украшенная сложнейшей вышивкой-росписью - двусторонним швом, выполняемым без предварительного рисунка.
+                </p>
+            </div>
+        </section>
+
+        <section class="flex flex-col sm:flex-row items-center sm:items-stretch w-full gap-6 py-8 bg-gray-50 text-gray-900">
+            <div class="w-full sm:w-1/2 h-64 sm:h-[50vh] overflow-hidden px-5">
+                <img src="{{ url_for('static', filename='images/image3.png') }}" alt="Holidays image" class="w-full h-full object-cover block rounded-xl" />
+            </div>
+            <div class="w-full sm:w-1/2 flex flex-col justify-center p-6 sm:p-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-3">Праздники</h2>
+                <p class="text-lg sm:text-xl leading-relaxed text-gray-700">
+                    Календарные обряды образуют сакральный круг года. Сухат-туй (Встреча весны) 22 марта - встречают 'Госпожу Весну', красят яйца в луковой шелухе, катаются на качелях 'чтобы земля быстрее поворачивалась'. Акатуй (Праздник плуга) — главный национальный праздник после посевных с конными скачками, борьбой 'кӗрешӳ', состязаниями певцов. Синсе — ноябрьский ритуал поминовения предков с приготовлением ритуальной каши 'йӑва' и кормлением духов через окно. Сӗрен в зимнее солнцестояние — праздник возрождения солнца с ряжеными и сжиганием соломенного чучела Зимы.
+                </p>
+            </div>
+        </section>
+
+        <section class="flex flex-col sm:flex-row-reverse items-center sm:items-stretch w-full gap-6 py-8 bg-red-900 text-white dark" id="quiz-section">
+            <div id="quiz-container" class="w-full sm:w-1/2 flex flex-col justify-center p-6 sm:p-12"></div>
+            <div class="w-full sm:w-1/2 flex flex-col justify-center p-6 sm:p-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-3">Пройдите квиз</h2>
+                <p class="text-lg sm:text-xl leading-relaxed text-gray-200">
+                    и узнайте, насколько много вы знаете о чувашской культуре
+                </p>
+            </div>
+        </section>
+
+        <div class="relative" id="map-section">
+            <div id="map-container"></div>
+            <div class="absolute top-4 left-4 z-10 bg-white/80 text-black p-2 rounded">
+                <div class="text-sm font-semibold">Карта</div>
+                <div class="text-xs">Культурные места Чувашии</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

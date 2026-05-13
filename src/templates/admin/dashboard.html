@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-6">Панель управления</h1>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <a href="{{ url_for('admin_points') }}" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+        <h2 class="text-lg font-semibold text-gray-800">Точки на карте</h2>
+        <p class="text-3xl font-bold text-blue-600 mt-2">{{ points_count }}</p>
+        <p class="text-sm text-gray-500 mt-1">всего точек</p>
+    </a>
+    <a href="{{ url_for('admin_questions') }}" class="block bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+        <h2 class="text-lg font-semibold text-gray-800">Вопросы квиза</h2>
+        <p class="text-3xl font-bold text-green-600 mt-2">{{ questions_count }}</p>
+        <p class="text-sm text-gray-500 mt-1">всего вопросов</p>
+    </a>
+</div>
+{% endblock %}
